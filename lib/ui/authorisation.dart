@@ -16,7 +16,7 @@ class CreateAccount extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const Text('Click to go in account'),
+            const Text('Click to go in accoun'),
             ElevatedButton(
                 onPressed: () {
                   // search.createNewToken(context);
