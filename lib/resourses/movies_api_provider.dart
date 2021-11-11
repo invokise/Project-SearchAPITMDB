@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
 import 'package:pokemons/constants/api_key.dart';
 import 'package:pokemons/models/account_model.dart';
@@ -8,8 +9,18 @@ import 'package:pokemons/models/session_id.dart';
 import 'package:pokemons/models/token_model.dart';
 
 class MovieApiProvider {
-  // Client client = Client();
+  Client client = Client();
 
+
+  Future<Account> ccounts(String sessionId) async {
+    final response = await client.get(Uri.parse(
+        "http://api.themoviedb.org/3/account?session_id=$sessionId&=api_key=${ApiKey().apiKey}"));
+    if (response.statusCode == 200) {
+      return Account.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('failed');
+    }
+  }
 
   Future<Account> fetchAccounts(String sessionId) async {
     final response = await http.get(Uri.parse(
@@ -20,6 +31,7 @@ class MovieApiProvider {
       throw Exception('failed');
     }
   }
+  
 
   Future<SessionId> createSession(String token) async {
     final response = await http.post(
