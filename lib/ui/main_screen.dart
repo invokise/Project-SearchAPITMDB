@@ -3,9 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:pokemons/constants/text_styles.dart';
 import 'package:pokemons/main.dart';
 import 'package:pokemons/models/movies_model.dart';
-import 'package:pokemons/ui/full_overview_film_main.dart';
+import 'package:pokemons/ui/full_overview_film.dart';
 import 'package:pokemons/ui/side_bar_menu.dart';
-
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -71,8 +70,7 @@ class _TableOfContentState extends State<TableOfContent> {
           ),
         ),
         TextButton(
-          onPressed: () { 
-          },
+          onPressed: () {},
           child: const Text(
             'More',
             style: AppTextStyles.greenText15,

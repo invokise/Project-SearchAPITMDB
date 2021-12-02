@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokemons/constants/text_styles.dart';
 import 'package:pokemons/main.dart';
 import 'package:pokemons/models/movies_model.dart';
-import 'package:pokemons/ui/full_overview_film_search.dart';
+import 'package:pokemons/ui/full_overview_film.dart';
 
 class SearchFilm extends StatelessWidget {
   const SearchFilm({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ class SearchFilm extends StatelessWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => FullOverviewSearchFilm(
+                                  builder: (context) => FullOverviewFilm(
                                     movie: movie,
                                   ),
                                 ),
@@ -99,7 +99,7 @@ class BodyWidget extends StatelessWidget {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(15)),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15) ,
+                  borderRadius: BorderRadius.circular(15),
                   child: AspectRatio(
                     aspectRatio: 0.7,
                     child: Image.network(
