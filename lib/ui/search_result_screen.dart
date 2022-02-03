@@ -9,6 +9,7 @@ class SearchFilm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -57,7 +58,7 @@ class SearchFilm extends StatelessWidget {
                         ],
                       ),
                     );
-                  });
+                  },);
             } else {
               return const Center(child: CircularProgressIndicator());
             }
@@ -78,13 +79,14 @@ class BodyWidget extends StatelessWidget {
       required this.pathImage,
       required this.nameFilm,
       required this.dataRelease,
-      required this.description})
+      required this.description,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       final cardConstraints = MediaQuery.of(context).size.height * 0.38;
+
       return SizedBox(
         height: MediaQuery.of(context).size.height * 0.35,
         child: Card(
@@ -139,7 +141,7 @@ class BodyWidget extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

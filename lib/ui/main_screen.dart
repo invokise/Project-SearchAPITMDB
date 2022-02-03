@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:pokemons/constants/text_styles.dart';
 import 'package:pokemons/main.dart';
 import 'package:pokemons/models/movies_model.dart';
@@ -75,7 +74,7 @@ class _TableOfContentState extends State<TableOfContent> {
             'More',
             style: AppTextStyles.greenText15,
           ),
-        )
+        ),
       ],
     );
   }
@@ -99,47 +98,50 @@ class Content extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.separated(
-                  separatorBuilder: (context, _) => const SizedBox(
-                        width: 15,
-                      ),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    final movie = snapshot.data!.results![index];
-                    return SizedBox(
-                      width: 100,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => FullOverviewFilm(
-                                      movie: movie,
-                                    )),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: AspectRatio(
-                                aspectRatio: 0.7,
-                                child: Image.network(
-                                  'https://image.tmdb.org/t/p/w500' +
-                                      movie.posterPath.toString(),
-                                ),
+                separatorBuilder: (context, _) => const SizedBox(
+                  width: 15,
+                ),
+                scrollDirection: Axis.horizontal,
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  final movie = snapshot.data!.results![index];
+                  
+                  return SizedBox(
+                    width: 100,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => FullOverviewFilm(
+                              movie: movie,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: AspectRatio(
+                              aspectRatio: 0.7,
+                              child: Image.network(
+                                'https://image.tmdb.org/t/p/w500' +
+                                    movie.posterPath.toString(),
                               ),
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Expanded(
-                              child: Text(movie.originalTitle.toString()),
-                            )
-                          ],
-                        ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Expanded(
+                            child: Text(movie.originalTitle.toString()),
+                          ),
+                        ],
                       ),
-                    );
-                  });
+                    ),
+                  );
+                },
+              );
             } else {
               return const Center(child: CircularProgressIndicator());
             }
@@ -163,6 +165,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
+    
     return Column(
       children: [
         Image.asset(
@@ -183,12 +186,12 @@ class _SearchFieldState extends State<SearchField> {
                   controller: textEditingController,
                   decoration: InputDecoration(
                     hintMaxLines: 2,
-                    // errorText: search.val ? 'Пустое поле' : null,
-                    label: const Text('Найти фильм...',
-                        style: TextStyle(
-                          color: Colors.deepOrange,
-                        )),
-                    // hintText: 'Найти фильм...',
+                    label: const Text(
+                      'Найти фильм...',
+                      style: TextStyle(
+                        color: Colors.deepOrange,
+                      ),
+                    ),
                     prefixIcon:
                         const Icon(Icons.search, color: Colors.deepOrange),
                     focusedBorder: OutlineInputBorder(
@@ -201,11 +204,6 @@ class _SearchFieldState extends State<SearchField> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  // onFieldSubmitted: (value) {
-                  //   if (!_formKey.currentState!.validate()) {
-                  //     return;
-                  //   }
-                  // },
                 ),
                 Positioned(
                   right: 0,
@@ -213,20 +211,21 @@ class _SearchFieldState extends State<SearchField> {
                     height: 60,
                     width: 75,
                     decoration: BoxDecoration(
-                        color: Colors.deepOrange,
-                        borderRadius: BorderRadius.circular(20)),
+                      color: Colors.deepOrange,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     child: TextButton(
-                        onPressed: () {
-                          // search.validate(textEditingController);
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          }
-                          search.searchFunc(textEditingController, context);
-                        },
-                        child: const Text(
-                          'Поиск',
-                          style: AppTextStyles.whiteText15,
-                        )),
+                      onPressed: () {
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+                        search.searchFunc(textEditingController, context);
+                      },
+                      child: const Text(
+                        'Поиск',
+                        style: AppTextStyles.whiteText15,
+                      ),
+                    ),
                   ),
                 ),
               ]),

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokemons/constants/text_styles.dart';
@@ -13,7 +13,7 @@ class SideBarMenu extends StatelessWidget {
       child: Column(
         children: [
           UserAccountsDrawerHeader(
-            accountName: const Text('xxx'), //snapshot.data!.name.toString()),
+            accountName: const Text('xxx'), 
             accountEmail: const Text('xxx@gmail.com'),
             currentAccountPicture: Observer(builder: (context) {
               return !search.logout
@@ -27,17 +27,16 @@ class SideBarMenu extends StatelessWidget {
                             child: const Text(
                               'Login',
                               style: AppTextStyles.blueBold16,
-                            )),
+                            ),),
                       ),
                     )
                   : ClipOval(
                       child: Image.asset(
                       'assets/prof.jpg',
-                      //snapshot.data!.avatar.toString(),
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: double.infinity,
-                    ));
+                    ),);
             }),
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -73,7 +72,7 @@ class SideBarMenu extends StatelessWidget {
               title: const Text("Logout"),
               onTap: () {
                 search.showAlertDialog(context);
-              }),
+              },),
         ],
       ),
     );

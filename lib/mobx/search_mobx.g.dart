@@ -24,6 +24,21 @@ mixin _$Search on _SearchBase, Store {
     });
   }
 
+  final _$tokenAtom = Atom(name: '_SearchBase.token');
+
+  @override
+  String? get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(String? value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
+    });
+  }
+
   final _$keywordAtom = Atom(name: '_SearchBase.keyword');
 
   @override
@@ -153,6 +168,7 @@ mixin _$Search on _SearchBase, Store {
   String toString() {
     return '''
 val: ${val},
+token: ${token},
 keyword: ${keyword},
 onTaped: ${onTaped},
 logout: ${logout}

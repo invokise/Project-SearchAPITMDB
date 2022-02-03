@@ -24,16 +24,18 @@ abstract class _SearchBase with Store {
   String validate(TextEditingController textEditingController) {
     if (textEditingController.text.isEmpty) {
       val = true;
+
       return "Пустое поле";
     } else {
       val = false;
+
       return null.toString();
     }
   }
 
   @action
   void searchFunc(
-      TextEditingController textEditingController, BuildContext context) {
+      TextEditingController textEditingController, BuildContext context,) {
     setText(textEditingController.text);
     Navigator.pushNamed(context, '/second');
   }
@@ -42,6 +44,7 @@ abstract class _SearchBase with Store {
   void cancel(BuildContext context) {
     Navigator.pop(context);
     onTaped = false;
+
     return;
   }
 
@@ -49,26 +52,16 @@ abstract class _SearchBase with Store {
   void contine(BuildContext context) {
     Navigator.pop(context);
     logout = false;
+
     return;
   }
 
   @action
   void login() {
     logout = true;
+    
     return;
   }
-
-  // @action
-  // Future createNewToken(BuildContext context) async {
-  //   var result = await MovieApiProvider().getToken();
-  //   token = result.requestToken;
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (context) =>const MainScreen(
-  //       ),
-  //     ),
-  //   );
-  // }
 
   @action
   showAlertDialog(BuildContext context) {
@@ -78,7 +71,7 @@ abstract class _SearchBase with Store {
       actions: [
         ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.red)),
+              backgroundColor: MaterialStateProperty.all(Colors.red),),
           onPressed: () {
             cancel(context);
           },
@@ -93,7 +86,7 @@ abstract class _SearchBase with Store {
             onPressed: () {
               contine(context);
             },
-            child: const Text('Continue')),
+            child: const Text('Continue'),),
       ],
     );
     if (!onTaped) {
