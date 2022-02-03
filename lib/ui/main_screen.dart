@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemons/constants/text_styles.dart';
 import 'package:pokemons/main.dart';
@@ -96,6 +97,7 @@ class Content extends StatelessWidget {
         child: FutureBuilder<Movies>(
           future: future,
           builder: (context, snapshot) {
+            // ignore: prefer-conditional-expressions
             if (snapshot.hasData) {
               return ListView.separated(
                 separatorBuilder: (context, _) => const SizedBox(
@@ -105,7 +107,7 @@ class Content extends StatelessWidget {
                 itemCount: 20,
                 itemBuilder: (context, index) {
                   final movie = snapshot.data!.results![index];
-                  
+
                   return SizedBox(
                     width: 100,
                     child: InkWell(
@@ -124,8 +126,8 @@ class Content extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             child: AspectRatio(
                               aspectRatio: 0.7,
-                              child: Image.network(
-                                'https://image.tmdb.org/t/p/w500' +
+                              child: CachedNetworkImage(
+                                imageUrl: 'https://image.tmdb.org/t/p/w500' +
                                     movie.posterPath.toString(),
                               ),
                             ),
@@ -165,7 +167,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
-    
+
     return Column(
       children: [
         Image.asset(

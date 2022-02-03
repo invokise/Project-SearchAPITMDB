@@ -20,6 +20,7 @@ class SearchFilm extends StatelessWidget {
         body: FutureBuilder<Movies>(
           future: repository.searchAllMovies(search.keyword),
           builder: (context, snapshot) {
+            // ignore: prefer-conditional-expressions
             if (snapshot.hasData) {
               return ListView.builder(
                   itemCount: snapshot.data!.totalResults! > 20
@@ -27,6 +28,7 @@ class SearchFilm extends StatelessWidget {
                       : snapshot.data!.totalResults,
                   itemBuilder: (context, index) {
                     final movie = snapshot.data!.results![index];
+                    
                     return Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(

@@ -1,24 +1,22 @@
 import 'dart:convert';
 import 'package:pokemons/models/movies_model.dart';
-import 'package:pokemons/services/cach_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pokemons/services/cache_service.dart';
 
 import 'movies_api_provider.dart';
 
 class Repository {
   final moviesApiProvider = MovieApiProvider();
-  CachService cachService = CachService();
+  CacheService cacheService = CacheService();
 
   Future<Movies> fetchAllPopularMovies() async {
-    CachService.preference = await SharedPreferences.getInstance();
-    if (CachService.preference!.getString(CachService.key)!.isEmpty) {
+    if (CacheService.haveNotData()) {
       final response = await moviesApiProvider.fetchPopularMovies();
-      final save = jsonEncode(response);
-      cachService.saveMovie(save);
+      final movie = jsonEncode(response);
+      cacheService.saveMovie(movie);
 
       return response;
     } else {
-      return CachService().getMovie();
+      return CacheService().getMovie();
     }
   }
 
