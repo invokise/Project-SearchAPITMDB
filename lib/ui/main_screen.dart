@@ -6,10 +6,10 @@ class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _FilmotekaState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _FilmotekaState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = const <Widget>[
     HomeScreen(),
