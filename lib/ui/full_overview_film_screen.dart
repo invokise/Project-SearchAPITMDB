@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokemons/constants/text_styles.dart';
-import 'package:pokemons/models/movies_model.dart';
+import 'package:pokemons/models/movie_model.dart';
 
 class FullOverviewFilm extends StatelessWidget {
   final Results movie;
@@ -17,7 +17,7 @@ class FullOverviewFilm extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.deepOrange,
+            backgroundColor: const Color.fromRGBO(3, 37, 65, 1),
             title: const Text('Full Overview'),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

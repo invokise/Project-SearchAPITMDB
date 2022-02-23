@@ -1,10 +1,10 @@
-class Movies {
+class Movie {
   int? page;
   List<Results>? results;
   int? totalPages;
   int? totalResults;
-  Movies({this.page, this.results, this.totalPages, this.totalResults});
-  Movies.fromJson(Map<String, dynamic> json) {
+  Movie({this.page, this.results, this.totalPages, this.totalResults});
+  Movie.fromJson(Map<String, dynamic> json) {
     page = json['page'] as int?;
     if (json['results'] != null) {
       results = <Results>[];
@@ -44,21 +44,22 @@ class Results {
   bool? video;
   num? voteAverage;
   int? voteCount;
-  Results(
-      {this.adult,
-      this.backdropPath,
-      this.genreIds,
-      this.id,
-      this.originalLanguage,
-      this.originalTitle,
-      this.overview,
-      this.popularity,
-      this.posterPath,
-      this.releaseDate,
-      this.title,
-      this.video,
-      this.voteAverage,
-      this.voteCount,});
+  Results({
+    this.adult,
+    this.backdropPath,
+    this.genreIds,
+    this.id,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.popularity,
+    this.posterPath,
+    this.releaseDate,
+    this.title,
+    this.video,
+    this.voteAverage,
+    this.voteCount,
+  });
 
   Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'] as bool?;
@@ -93,7 +94,7 @@ class Results {
     data['video'] = video;
     data['vote_average'] = voteAverage;
     data['vote_count'] = voteCount;
-    
+
     return data;
   }
 }

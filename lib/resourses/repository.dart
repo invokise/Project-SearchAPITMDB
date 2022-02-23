@@ -1,16 +1,16 @@
 import 'dart:convert';
-import 'package:pokemons/models/movies_model.dart';
+import 'package:pokemons/models/movie_model.dart';
 import 'package:pokemons/services/cache_service.dart';
 
-import 'movies_api_provider.dart';
+import 'movie_api_provider.dart';
 
 class Repository {
-  final moviesApiProvider = MovieApiProvider();
+  static final movieApiProvider = MovieApiProvider();
   CacheService cacheService = CacheService();
 
-  Future<Movies> fetchAllPopularMovies() async {
+  Future<Movie> fetchPopularMovie() async {
     if (CacheService.haveNotData()) {
-      final response = await moviesApiProvider.fetchPopularMovies();
+      final response = await movieApiProvider.fetchPopularMovie();
       final movie = jsonEncode(response);
       cacheService.saveMovie(movie);
 
@@ -20,11 +20,11 @@ class Repository {
     }
   }
 
-  Future<Movies> fetchAllTopRatedMovies() async {
-    return await moviesApiProvider.fetchTopRatedMovies();
+  Future<Movie> fetchTopRatedMovie() async {
+    return await movieApiProvider.fetchTopRatedMovie();
   }
 
-  Future<Movies> searchAllMovies(String keyword) {
-    return moviesApiProvider.searchMovies(keyword);
+  Future<Movie> searchMovie(String keyword) {
+    return movieApiProvider.searchMovie(keyword);
   }
 }
