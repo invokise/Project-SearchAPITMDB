@@ -1,66 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemons/constants/text_styles.dart';
-import 'package:pokemons/main.dart';
-import 'package:pokemons/models/movies_model.dart';
-import 'package:pokemons/ui/full_overview_film.dart';
+import 'package:pokemons/ui/full_overview_film_screen.dart';
+import 'package:pokemons/ui/search_result_screen/bloc/search_result_bloc.dart';
 
-class SearchFilm extends StatelessWidget {
-  const SearchFilm({Key? key}) : super(key: key);
+class SearchResultScreen extends StatelessWidget {
+  const SearchResultScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Search Result'),
-          backgroundColor: Colors.deepOrange[800],
+          backgroundColor: const Color.fromRGBO(3, 37, 65, 1),
         ),
-        body: FutureBuilder<Movies>(
-          future: repository.searchAllMovies(search.keyword),
-          builder: (context, snapshot) {
-            // ignore: prefer-conditional-expressions
-            if (snapshot.hasData) {
+        body: BlocBuilder<SearchResultBloc, SearchResultState>(
+          builder: (context, state) {
+            if (state is SearchResultInitial) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is SearchResultSuccessState) {
               return ListView.builder(
-                  itemCount: snapshot.data!.totalResults! > 20
-                      ? 20
-                      : snapshot.data!.totalResults,
-                  itemBuilder: (context, index) {
-                    final movie = snapshot.data!.results![index];
-                    
-                    return Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => FullOverviewFilm(
-                                    movie: movie,
-                                  ),
+                itemCount: state.movie.totalResults,
+                itemBuilder: (context, index) {
+                  final movie = state.movie.results![index];
+
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => FullOverviewFilm(
+                                  movie: movie,
                                 ),
-                              );
-                            },
-                            child: BodyWidget(
-                              pathImage: 'https://image.tmdb.org/t/p/w500' +
-                                  snapshot.data!.results![index].posterPath
-                                      .toString(),
-                              nameFilm: snapshot.data!.results![index].title
-                                  .toString(),
-                              dataRelease: snapshot
-                                  .data!.results![index].releaseDate
-                                  .toString(),
-                              description: snapshot
-                                  .data!.results![index].overview
-                                  .toString(),
-                            ),
+                              ),
+                            );
+                          },
+                          child: BodyWidget(
+                            pathImage: 'https://image.tmdb.org/t/p/w500' +
+                                movie.posterPath.toString(),
+                            nameFilm: movie.title.toString(),
+                            dataRelease: movie.releaseDate.toString(),
+                            description: movie.overview.toString(),
                           ),
-                        ],
-                      ),
-                    );
-                  },);
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            } else if (state is SearchResultFailureState) {
+              return Text(state.error);
             } else {
               return const Center(child: CircularProgressIndicator());
             }
@@ -76,13 +70,13 @@ class BodyWidget extends StatelessWidget {
   final String nameFilm;
   final String dataRelease;
   final String description;
-  const BodyWidget(
-      {Key? key,
-      required this.pathImage,
-      required this.nameFilm,
-      required this.dataRelease,
-      required this.description,})
-      : super(key: key);
+  const BodyWidget({
+    Key? key,
+    required this.pathImage,
+    required this.nameFilm,
+    required this.dataRelease,
+    required this.description,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

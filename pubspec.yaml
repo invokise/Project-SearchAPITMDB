@@ -31,9 +31,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_mobx: ^2.0.2
+  flutter_bloc: ^8.0.1
   http: ^0.13.4
-  mobx: ^2.0.5
   path_provider: ^2.0.8
   shared_preferences: ^2.0.12
 
@@ -43,7 +42,6 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  mobx_codegen: ^2.0.4
 
 flutter:
 
@@ -54,8 +52,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/background.png
-    - assets/cinema.jpg
-    - assets/sidebar.jpg
+    - assets/main.jpg
     - assets/prof.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

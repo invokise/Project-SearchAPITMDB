@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:pokemons/models/movies_model.dart';
+import 'package:pokemons/models/movie_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheService {
@@ -23,9 +23,9 @@ class CacheService {
     await preference.setString(key, movie);
   }
 
-  Future<Movies> getMovie() async {
+  Future<Movie> getMovie() async {
     final result = await preference.getString(key) ?? '';
 
-    return Movies.fromJson(jsonDecode(result));
+    return Movie.fromJson(jsonDecode(result));
   }
 }
