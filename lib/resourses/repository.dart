@@ -8,9 +8,9 @@ class Repository {
   static final movieApiProvider = MovieApiProvider();
   CacheService cacheService = CacheService();
 
-  Future<Movie> fetchPopularMovie() async {
+  Future<Movie> fetchPopMovie() async {
     if (CacheService.haveNotData()) {
-      final response = await movieApiProvider.fetchPopularMovie();
+      final response = await movieApiProvider.fetchPopMovie();
       final movie = jsonEncode(response);
       cacheService.saveMovie(movie);
 

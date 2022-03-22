@@ -22,7 +22,7 @@ class SearchResultScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (state is SearchResultSuccessState) {
               return ListView.builder(
-                itemCount: state.movie.totalResults,
+                itemCount: state.movie.results!.length,
                 itemBuilder: (context, index) {
                   final movie = state.movie.results![index];
 
@@ -103,7 +103,10 @@ class BodyWidget extends StatelessWidget {
                     child: Image.network(
                       pathImage,
                       errorBuilder: (_, __, ___) {
-                        return Container();
+                        return Image.asset(
+                          'assets/background.png',
+                          fit: BoxFit.fill,
+                        );
                       },
                     ),
                   ),

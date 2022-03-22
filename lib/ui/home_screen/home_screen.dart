@@ -234,12 +234,12 @@ class _SearchFieldState extends State<SearchField> {
                                 keyword:
                                     textEditingController.text.toLowerCase(),
                               ));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SearchResultScreen(),
+                            ),
+                          );
                         }
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SearchResultScreen(),
-                          ),
-                        );
                       },
                       child: const Text(
                         'Поиск',

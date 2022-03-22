@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemons/resourses/movie_api_provider.dart';
 import 'package:pokemons/resourses/repository.dart';
 import 'package:pokemons/services/cache_service.dart';
 import 'package:pokemons/ui/main_screen.dart';
@@ -11,6 +12,7 @@ final repository = Repository();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheService.initPreference();
+
   runApp(const App());
 }
 
@@ -19,6 +21,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MovieApiProvider().fetchPopMovie();
+
     return BlocProvider(
       create: (context) => SearchResultBloc(),
       child: MaterialApp(

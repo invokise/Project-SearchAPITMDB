@@ -17,7 +17,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     emit(HomeInitial());
     try {
-      final popularMovie = await repository.fetchPopularMovie();
+      final popularMovie = await repository.fetchPopMovie();
       final topRatedMovie = await repository.fetchTopRatedMovie();
       emit(HomeAllMoviesLoadedState(
         movie1: popularMovie,

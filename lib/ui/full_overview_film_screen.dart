@@ -34,8 +34,16 @@ class FullOverviewFilm extends StatelessWidget {
                   SizedBox(
                     height: constraints.maxHeight / 2.2,
                     width: constraints.maxWidth / 2.5,
-                    child: Image.network('https://image.tmdb.org/t/p/w500' +
-                        movie.posterPath.toString()),
+                    child: Image.network(
+                      'https://image.tmdb.org/t/p/w500' +
+                          movie.posterPath.toString(),
+                      errorBuilder: (_, __, ___) {
+                        return Image.asset(
+                          'assets/background.png',
+                          fit: BoxFit.fill,
+                        );
+                      },
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
